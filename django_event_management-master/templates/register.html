@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+<style>/* General styles */
+        /* Background for the login/registration section */
+.login_background {
+    background-color: #fff;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Card styling */
+.signup_card .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Card body styling */
+.signup_card .card-body {
+    padding: 1.5rem;
+}
+
+/* Input fields */
+.signup_card .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Button styling */
+.signup_card .Login_Button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup_card .Login_Button:hover {
+    background-color: #0056b3;
+}
+
+/* Form heading */
+.signup_card h5 {
+    margin-bottom: 1.5rem;
+}
+
+/* Link styling */
+.signup_card a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup_card a:hover {
+    text-decoration: underline;
+}
+
+/* Message alert */
+.alert {
+    margin-top: 1rem;
+}
+
+/* Responsive styling */
+@media (max-width: 767px) {
+    .signup_card .card-body {
+        padding: 1rem;
+    }
+}
+
+</style>
+</head>
+<body>
+<section class="login_background">
+    <div class="signup_card">
+        <div class="card">
+            <div class="row">
+                <div class="col col-lg-6 px-lg-3">
+                    <div class="card-body border">
+                        <h2 class="text-center fs-3 fw-bold">Create an Account!</h2>         
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="user-details">
+                                <div class="input-box">
+                                    <label class="form-label">User Name:</label>
+                                    <input class="form-control" type="text" name="username" placeholder="Enter your name">
+                                </div>
+                                <div class="input-box">
+                                    <label class="form-label">E-Mail ID:</label>
+                                    <input class="form-control" type="email" name="email" placeholder="Enter your E-Mail ID">
+                                </div>
+                                <div class="input-box">
+                                    <label class="form-label">Password:</label>
+                                    <input class="form-control" type="password" name="password1" placeholder="Enter your password">
+                                </div>
+                                <div class="input-box">
+                                    <label class="form-label">Confirm Password:</label>
+                                    <input class="form-control" type="password" name="password2" placeholder="Enter your password again">
+                                </div>
+                            </div>
+                            <div class="button">
+                                <input type="submit" class="Login_Button" value="Sign Up">
+                            </div>
+                        </form>
+                        <div class="text-center w-100 sign_up">
+                            <small>Already have an account?</small>
+                            <a href="{% url 'login' %}" class="ms-lg-1 text-warning text-decoration-none">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% for message in messages %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endfor %}
+</body>
+</html>

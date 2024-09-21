@@ -1,0 +1,132 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Booking Details
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url('your-background-image-url.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: #333;
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 1px solid #dee2e6;
+        background-color: #007bff;
+        color: white;
+    }
+
+    .card-body {
+        background-color: #fff;
+    }
+
+    .badge-info {
+        background-color: #17a2b8;
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .alert-info {
+        background-color: #d9edf7;
+        color: #31708f;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        border-color: #1aca52;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        text-align: center;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+</style>
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>{{ event.name }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Category:</strong> <span class="badge badge-info">{{ event.event_category }}</span></p>
+                        <p><strong>Description:</strong> <span class="description">{{ event.description|safe  }}</span></p>
+                        <p><strong>Status:</strong> <span class="badge badge-warning">{{ event.scheduled_status }}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Start Date:</strong> {{ event.start_date|date:"M d, Y" }}</p>
+                        <p><strong>End Date:</strong> {{ event.end_date|date:"M d, Y" }}</p>
+                        <p><strong>Location:</strong> {{ event.location }}</p>
+                        <p><strong>Venue:</strong> {{ event.venue }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Price:</strong> <span class="badge badge-success">${{ event.points }}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Maximum Attendees:</strong> {{ event.maximum_attende }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="mt-3">
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            {% if event_member %}
+                {% if event_member.canceled %}
+                    <button type="submit" class="btn btn-primary">Rebook Event</button>
+                {% else %}
+                    <button type="submit" class="btn btn-danger">Cancel Event</button>
+                {% endif %}
+            {% else %}
+                <button type="submit" class="btn btn-primary">Book Event</button>
+            {% endif %}
+        </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

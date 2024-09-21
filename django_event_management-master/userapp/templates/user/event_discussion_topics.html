@@ -1,0 +1,88 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Add Discussion
+{% endblock %}
+
+{% block content %}
+<style>
+    .discussion-header {
+        text-align: center;
+        margin: 2rem 0;
+        color: #333;
+    }
+
+    .discussion-header h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .discussion-list {
+        list-style: none;
+        padding: 0;
+        margin: 2rem auto;
+        max-width: 500px;
+    }
+
+    .discussion-list li {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .discussion-list li:hover {
+        background: #e9f7f2;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .discussion-list li .title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .discussion-list li .created-by {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .add-discussion-link {
+        display: block;
+        text-align: center;
+        margin: 1rem auto;
+        padding: 0.75rem 1.5rem;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: bold;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        
+    }
+
+    .add-discussion-link:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="discussion-header">
+    <h1>Discussion Topics for {{ event.name }}</h1>
+</div>
+
+<ul class="discussion-list">
+    {% for topic in topics %}
+    <li>
+        <div class="title">{{ topic.title }}</div>
+        <div class="created-by">Created by {{ topic.created_by }}</div>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'userapp:add-discussion-topic' event.id %}" class="add-discussion-link">Add Discussion Topic</a>
+{% endblock %}

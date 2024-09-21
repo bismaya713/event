@@ -19,12 +19,17 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 from .views import dashboard, login_page, logut_page
 from . import settings
+from . import views
+from .views import index
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
-    path('', dashboard, name='dashboard'),
-    path('login/', login_page, name='login'),
+    path('userapp/', include('userapp.urls', namespace='userapp')),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_page, name='login'),
     path('logout/', logut_page, name='logout'),
+    path('dashboard/', dashboard, name='dashboard'),
     path('events/', include('events.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

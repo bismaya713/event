@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from mapbox_location_field.models import LocationField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
+
 
 
 class EventCategory(models.Model):
@@ -55,6 +57,7 @@ class Event(models.Model):
     updated_user = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True, related_name='event_updated_user')
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     status_choice = (
         ('disabled', 'Disabled'),
         ('active', 'Active'),
@@ -110,7 +113,7 @@ class EventJobCategoryLinking(models.Model):
 
 class EventMember(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     attend_status_choice = (
         ('waiting', 'Waiting'),
         ('attending', 'Attending'),
@@ -118,11 +121,12 @@ class EventMember(models.Model):
         ('absent', 'Absent'),
         ('cancelled', 'Cancelled'),
     )
-    attend_status = models.CharField(choices=attend_status_choice, max_length=10)
-    created_user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='eventmember_created_user')
-    updated_user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='eventmember_updated_user')
+    attend_status = models.CharField(choices=attend_status_choice, max_length=10, default='waiting')
+    canceled = models.BooleanField(default=False)  
+    created_user = models.ForeignKey(User, related_name='created_members', on_delete=models.CASCADE)
+    updated_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='eventmember_updated_user')
     created_date = models.DateField(auto_now_add=True)
-    updated_date = models.DateField(auto_now_add=True)
+    updated_date = models.DateField(auto_now=True)
     status_choice = (
         ('disabled', 'Disabled'),
         ('active', 'Active'),
@@ -130,7 +134,7 @@ class EventMember(models.Model):
         ('blocked', 'Blocked'),
         ('completed', 'Completed'),
     )
-    status = models.CharField(choices=status_choice, max_length=10)
+    status = models.CharField(choices=status_choice, max_length=10, default='active')
 
 
     class Meta:
@@ -197,11 +201,23 @@ class UserCoin(models.Model):
     def get_absolute_url(self):
         return reverse('user-mark')
 
+# models.py in events app
 
 
+class EventDiscussionTopic(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
 
+class EventDiscussionComment(models.Model):
+    topic = models.ForeignKey(EventDiscussionTopic, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
 
-
-
-
+    def __str__(self):
+        return f'Comment by {self.user} on {self.topic}'

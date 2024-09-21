@@ -1,0 +1,11 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Successful{% endblock %}
+
+{% block content %}
+<!-- templates/user/payment_success.html -->
+<h2>Payment Successful!</h2>
+<p>Your event booking has been confirmed.</p>
+<a href="{% url 'userapp:event_detail' event_id %}">View Event Details</a>
+
+{% endblock %}

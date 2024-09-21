@@ -1,0 +1,132 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-header {
+        text-align: center;
+        margin: 3rem 0;
+    }
+
+    .dashboard-header h2 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .dashboard-header h3 {
+        font-size: 1.75rem;
+        color: #555;
+        margin-bottom: 2rem;
+    }
+
+    .event-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+    }
+
+    .event-table th,
+    .event-table td {
+        padding: 1rem;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .event-table th {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .event-table tr:nth-child(odd) {
+        background: #e9f7f2;
+    }
+
+    .event-table tr:nth-child(even) {
+        background: #f2f9ff;
+    }
+
+    .event-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .event-table .status {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .event-table .price {
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+
+<div class="dashboard-header">
+    <h2>My Dashboard</h2>
+    <h3>Booked Events</h3>
+</div>
+
+<!-- Booked Events Table -->
+<table class="event-table">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Location</th>
+            <th>Venue</th>
+            <th>Price</th>
+            <th>Max Attendees</th>
+            <th>Booking Status</th> <!-- New Column for Cancellation Status -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for event_member in booked_events %}
+        <tr>
+            <td>{{ event_member.event.name }}</td>
+            <td><span class="status">{{ event_member.attend_status }}</span></td>
+            <td>{{ event_member.event.event_category }}</td>
+            <td>{{ event_member.event.description|safe }}</td>
+            <td>{{ event_member.event.start_date|date:"M d, Y" }}</td>
+            <td>{{ event_member.event.end_date|date:"M d, Y" }}</td>
+            <td>{{ event_member.event.location }}</td>
+            <td>{{ event_member.event.venue }}</td>
+            <td class="price">${{ event_member.event.points }}</td>
+            <td>{{ event_member.event.maximum_attende }}</td>
+            <td>
+                {% if event_member.canceled %}
+                    <span class="text-danger">Canceled</span>
+                {% else %}
+                    <span class="text-success">Active</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Alternative Display: Event Bookings with Cancelation Status -->
+<div class="container mt-4">
+    <h2>Your Booked Events</h2>
+    <ul>
+        {% for event_member in event_members %}
+            <li>{{ event_member.event.name }} - 
+                {% if event_member.canceled %}
+                    <span class="text-danger">Canceled</span>
+                {% else %}
+                    <span class="text-success">Active</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

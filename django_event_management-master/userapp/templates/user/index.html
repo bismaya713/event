@@ -1,0 +1,259 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{%block title%}
+Home
+{% endblock %}
+
+        {%block content %}
+
+        <section id="landing" class="d-flex justify-content-center align-items-center position-relative">
+            <div class="blur-background"></div>
+            <div class="overlay"></div>
+            <div class="text-center text-white position-relative">
+                <h1 class="display-4">Welcome to Our Event Management System</h1>
+                <div id="flashing-text" class="mt-4">
+                    <span class="flash-text">Plan.</span>
+                    <span class="flash-text">Organize.</span>
+                    <span class="flash-text">Execute.</span>
+                </div>
+                <p class="mt-4">Making your events successful and memorable.</p>
+                <a href="#about" class="btn btn-primary btn-lg mt-4">Learn More</a>
+            </div>
+        </section>        
+        
+
+
+<!-- About Us Section -->
+<section id="about" class="about py-5" style="background: #f3f4f5 url({% static 'userapp/images/ph3.jpg' %}) no-repeat center center / cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mb-4">
+                <h2 class="display-5 animate__animated animate__fadeInDown">About Us</h2>
+                <p class="lead animate__animated animate__fadeInUp">We are a team of event enthusiasts who are passionate about helping you plan and execute successful events.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-3 animate__animated animate__fadeInLeft">Our Mission</h3>
+                <p class="animate__animated animate__fadeInLeft">Our event management system is designed to make your life easier, with features that simplify every step of the event planning process.</p>
+            </div>
+            <div class="col-md-6 animate__animated animate__fadeInRight">
+                <img src="{% static 'userapp/images/ph2.jpg' %}" alt="About Us Image" class="img-fluid rounded shadow-lg mb-5">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 text-center animate__animated animate__zoomIn">
+                <i class="fas fa-calendar-alt fa-3x mb-3 text-primary"></i>
+                <h4>Event Scheduling & Management</h4>
+                <p>Plan and organize events seamlessly with our robust scheduling and management tools.</p>
+            </div>
+            <div class="col-md-4 text-center animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
+                <i class="fas fa-ticket-alt fa-3x mb-3 text-primary"></i>
+                <h4>Registration & Ticketing</h4>
+                <p>Easy registration and ticketing solutions to handle your event attendees effortlessly.</p>
+            </div>
+            <div class="col-md-4 text-center animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
+                <i class="fas fa-bullhorn fa-3x mb-3 text-primary"></i>
+                <h4>Marketing & Promotion</h4>
+                <p>Promote your events with our integrated marketing tools to reach a wider audience.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <a href="#contact" class="btn btn-primary btn-lg mt-3 animate__animated animate__pulse animate__infinite">Learn More About Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Contact Us Section -->
+<section id="contact" class="contact py-5" style="background-color: #f8f9fa;">
+    <div class="container-fluid px-0">
+        <div class="row mx-0 text-center mb-5">
+            <div class="col-md-12">
+                <h2 class="display-5">Contact Us</h2>
+                <p class="lead">Get in touch with us to learn more about our event management system and how we can help you plan and execute successful events.</p>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="col-md-6 px-5">
+                <h3 class="mb-4">Reach Out to Us</h3>
+                <p>If you have any questions, feel free to drop us a message. We're here to assist you in every way possible.</p>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-map-marker-alt text-primary"></i> 123 Event Street, City, Country</li>
+                    <li class="mb-2"><i class="fas fa-phone text-primary"></i> +123 456 7890</li>
+                    <li class="mb-2"><i class="fas fa-envelope text-primary"></i> info@example.com</li>
+                </ul>
+            </div>
+            <div class="col-md-6 px-5">
+                <form>
+                    <div class="form-group mb-3">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3 w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--client-->
+<section id="clients" class="py-5">
+    <div class="container-fluid text-center">
+        <h2 class="mb-4">Our Clients</h2>
+        <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="2"></li>
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="3"></li>
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="4"></li>
+                <li data-bs-target="#clientCarousel" data-bs-slide-to="5"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Amazon_logo.svg' %}" class="d-block logo-image" alt="Client 1">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Apple_logo_black.svg' %}" class="d-block logo-image" alt="Client 2">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Netflix_2015_logo.svg' %}" class="d-block logo-image" alt="Client 3">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Facebook_f_logo_(2019).svg' %}" class="d-block logo-image" alt="Client 4">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Spotify_logo_without_text.svg' %}" class="d-block logo-image" alt="Client 5">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="{% static 'userapp/images/Apple_logo_black.svg' %}" class="d-block logo-image" alt="Client 6">
+                    </div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#clientCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#clientCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQs Section -->
+<div class="container-fluid mt-5 px-0">
+    <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    What is Event Management?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Event management is the application of project management to the creation and development of large-scale events such as festivals, conferences, ceremonies, formal parties, concerts, or conventions.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    What Do We Do?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We offer a wide range of services to make your event successful, including planning, logistics, marketing, and execution. Our team ensures every detail is taken care of.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    How to Book an Event?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Browse through our list of upcoming events, click on the event you're interested in, and follow the booking instructions on the event page. It's quick and easy!
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    What Are Your Payment Methods?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We accept all major credit cards, debit cards, and digital payment services. We also offer Razorpay integration for seamless online transactions.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Can I Cancel My Booking?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes, you can cancel your booking up to 48 hours before the event. Please check our cancellation policy for more details.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    Do You Provide Event Equipment?
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes, we provide all the necessary equipment for your event, including sound systems, lighting, and seating arrangements based on your event's requirements.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}

@@ -1,0 +1,707 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}
+
+        {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+        .nav li a{
+            font-size: 20px;
+            color: rgb(77, 170, 65);
+        }
+        .navbar-brand{
+            font-size: 25px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: brown;
+        }
+      
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .tex-center {
+    text-align: center;
+  }
+  
+  /* Form Styles */
+  
+  form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  form input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  form button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  footer {
+    background-color: var(--para);
+    padding: 3rem 0;
+    color: var(--white);
+  }
+  
+  .footer_div_ul div ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-size:12px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+  
+  .footer_div_ul div ul li a:hover{
+    color: var(--p);
+  }
+  
+  .footer_div_ul div p{
+  color: var(--p);
+  font-size:13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  }
+  
+  
+  .footer_div_ul div p{
+    text-decoration: none;
+    color: var(--white);
+    font-size:12px;
+    font-weight: 400;
+    line-height: 25px;
+  }
+  .footer_div_ul div p i{
+    padding: 2px;
+  }
+  
+  .footer_div_ul div li {
+    list-style: none;
+  }
+  
+  .footer_subhead p{
+    text-decoration: none;
+    color: var(--white);
+    font-size:12px;
+    font-weight: 100;
+    line-height: auto;
+  }
+  /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* About Section */
+.about {
+    background-color: #ffffff;
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.about ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.about li:before {
+    content: "\2022";
+    color: #3498db;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #ffffff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer .container div {
+    margin: 10px 0;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer img {
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+/* Landing page styles */
+#landing {
+
+    background: url("{% static 'userapp/images/stock.jpg' %}") no-repeat center center/cover;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.blur-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    z-index: 2;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    z-index: 2;
+}
+#landing .text-center {
+    z-index: 3;
+}
+#flashing-text {
+    font-size: 2rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.flash-text {
+    display: inline-block;
+    opacity: 0;
+    animation: flashText 6s infinite;
+}
+
+.flash-text:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.flash-text:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.flash-text:nth-child(3) {
+    animation-delay: 4s;
+}
+
+@keyframes flashText {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 30% {
+        opacity: 1;
+    }
+}
+
+.btn-primary {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+/* Carousel item styling */
+#clients .container-fluid {
+        padding: 0;
+    }
+
+    /* Make sure the client logos are aligned and spaced properly */
+    .client-slide {
+        gap: 2rem;
+    }
+
+    /* Control the size of the logo images */
+    .logo-image {
+        max-height: 150px;
+        max-width: 150px;
+        object-fit: contain;
+    }
+
+    /* Carousel full width, no gap between images */
+    .carousel-item {
+        width: 100%;
+    }
+
+    /* Center the controls */
+    .carousel-control-prev, 
+    .carousel-control-next {
+        width: 5%;
+    }
+
+    /* Remove padding/margins around images */
+    .carousel-inner {
+        display: flex;
+        align-items: center;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Center the heading */
+    h2 {
+        font-size: 2.5rem;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    /* Accordion styling */
+    .accordion-button {
+        background-color: #f8f9fa;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .accordion-body {
+        background-color: #f1f1f1;
+        color: #555;
+    }
+
+    .accordion-item {
+        border: 1px solid #ddd;
+        margin-bottom: 0.5rem;
+        border-radius: 0.25rem;
+    }
+
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Title and description styling */
+    h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .lead {
+        color: #555;
+        font-size: 1.1rem;
+    }
+
+    /* Contact info styling */
+    .fas {
+        margin-right: 8px;
+    }
+
+    /* Form styling */
+    .form-control {
+        border-radius: 0.25rem;
+        border: 1px solid #ddd;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: none;
+    }
+
+    /* Button styling */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    /* Adjust padding and spacing */
+    .px-5 {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .list-unstyled li {
+        font-size: 1.1rem;
+    }
+
+    .fa-3x {
+        color: #007bff;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .fa-3x:hover {
+        transform: scale(1.2);
+        color: #0056b3;
+    }
+
+    /* Button animation */
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    /* Shadow effect on the image */
+    .img-fluid {
+        border-radius: 15px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Animation for sections using Animate.css library */
+    .animate__animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+/* Ensure the navbar is fixed at the top */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  transition: background-color 0.3s ease; /* Ensures navbar is on top */
+}
+body {
+    padding-top: 56px; /* Adjust based on the height of your navbar */
+}
+/* Smooth scrolling effect */
+html {
+    scroll-behavior: smooth;
+}
+.navbar-nav .nav-link {
+    color: #f8f9fa; /* Default link color */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: #17a2b8;  /* Color change on hover */
+    background-color: rgba(87, 96, 99, 0.1); /* Slight background color change */
+    border-radius: 10px;
+}
+/* Highlight active link */
+.navbar-nav .nav-link.active {
+    color: #f8f9fa; /* Change to your preferred color */
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px; /* Slightly different background for active links */
+}
+/* Custom Styles for the Events Page */
+.event-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-body {
+    background-color: #f8f9fa;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.card-title {
+    color: #343a40;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">EvenTo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'userapp:userapp_index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'userapp:event-list' %}">Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'userapp:dashboard' %}">Dashboard</a>
+                </li>
+                
+                <!-- Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Account</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    {%block content%}
+
+    {% endblock %}
+
+    <footer class="px-lg-5 ">
+      <div class="  border-bottom border-secondary ">
+        <div class="row mb-lg-4 ">
+    
+          <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="row row-cols-2 row-cols-sm-2 footer_div_ul ">
+              <div class="m-auto">
+                <ul class="p-0">
+                  <h6>About Us</h6>
+                  <li><a href="">Our Services</a></li>
+                  <li><a href="">Contact Us</a></li>
+                  <li><a href="">Locate Us</a></li>
+                </ul>
+              </div>
+              <div class="m-auto">
+                <ul class="p-0">
+                <h6>Consumer Policy</h6>
+                  <li><a href="">Security</a></li>
+                  <li><a href="">Returns Policy</a></li>
+                  <li><a href="">Terms & Conditions</a></li>
+                  <li><a href="">Privacy Policy</a></li>
+                </ul>
+              </div>
+             
+            </div>
+          </div>
+    
+          <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="row row-cols-2 row-cols-sm-2 footer_div_ul">
+              <div class="d-none d-md-block d-lg-block">
+                <ul>
+                <h6>Help</h6>
+                  <li><a href="">Own Grown</a></li>
+                  <li><a href="">Maintenance</a></li>
+                </ul>
+              </div>
+              <div class="text-start d-none d-md-block d-lg-block ">
+                <ul class="p-0">
+                  <h6>Customer Care</h6>
+                  <li><a href="">Track Order</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="row row-cols-2 row-cols-sm-2   ms-lg-2  footer_div_ul mb-2">
+              <div class="border-end border-white m-auto">
+                <h6>Get in Touch</h6>
+                <p><i class="fa-solid fa-phone"></i> +91 -7735955569</p>
+                <p><i class="fa-solid fa-envelope"></i> event@outlook.com</p>
+                
+                <h6>Socials:</h6>
+                <p class="fs-5 mt-3">
+                  <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="https://twitter.com"><i class="fa-brands fa-square-x-twitter"></i></a>
+                </p>
+              </div>
+              <div class="m-auto">
+                <h6>Registered Office Address</h6>
+                <p>Plot No: 3298/5536,<br>
+                  C-8, Lane-5A,<br>
+                  Gouri Nagar,<br>
+                  Old Town (Khorda),<br>
+                  Bhubaneswar, Khorda- 751002,<br>
+                  Odisha</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4 ps-3 pe-3 mt-lg-3 footer_subhead">
+        <p class="">This Website is Designed and Developed by Liku .</p>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  </script>
+  <script>
+    var clientCarousel = new bootstrap.Carousel('#clientCarousel', {
+        interval: 2000, // Change slide every 2 seconds
+        wrap: true
+    });
+</script>
+    
+</body>
+</html>

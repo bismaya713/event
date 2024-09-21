@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'betterforms',
+    'django_extensions',
 
     # Local apps
+    'userapp',
     'events.apps.EventsConfig',
 ]
 
@@ -130,7 +132,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
 # Media files (Images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -150,3 +151,4 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
     },
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
