@@ -1,0 +1,100 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fa; /* Light background color */
+    }
+
+    .profile-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.2s; /* Add animation on hover */
+    }
+
+    .profile-container:hover {
+        transform: scale(1.02); /* Slight scale effect on hover */
+    }
+
+    h1 {
+        color: #007bff; /* Primary color for heading */
+        margin-bottom: 20px;
+    }
+
+    .profile-picture {
+        margin-bottom: 20px;
+    }
+
+    .profile-picture img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* Circular profile picture */
+        object-fit: cover; /* Cover to maintain aspect ratio */
+        border: 2px solid #007bff; /* Border for the picture */
+        transition: transform 0.3s; /* Animation on hover */
+    }
+
+    .profile-picture img:hover {
+        transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+
+    .placeholder {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #e0e0e0; /* Placeholder color */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6c757d;
+        font-size: 14px;
+        border: 2px solid #007bff; /* Border for placeholder */
+    }
+
+    .profile-form {
+        margin-top: 20px;
+    }
+
+    .profile-form button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .profile-form button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+</style>
+
+<div class="profile-container">
+    <h1>Profile of {{ user.username }}</h1>
+
+    <div class="profile-picture">
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+        {% else %}
+            <div class="placeholder">No Profile Picture Uploaded</div>
+        {% endif %}
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Profile Picture</button>
+    </form>
+</div>
+{% endblock %}

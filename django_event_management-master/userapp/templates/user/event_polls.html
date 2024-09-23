@@ -1,0 +1,31 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Polls
+{% endblock %}
+
+{% block content %}
+
+<!-- event_polls.html in userapp/templates/user -->
+<h1 style="text-align: center;">Polls for {{ event.name }}</h1>
+<ul style="list-style-type: none; padding: 0;">
+    {% for poll in polls %}
+    <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        <strong>{{ poll.question }}</strong>
+        <form action="{% url 'userapp:vote-poll' poll.id %}" method="post" style="margin-top: 10px;">
+            {% csrf_token %}
+            {% for choice in poll.choices.all %}
+            <div>
+                <input type="radio" name="choice" value="{{ choice.id }}" id="choice_{{ choice.id }}" required>
+                <label for="choice_{{ choice.id }}">{{ choice.choice_text }}</label>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Vote</button>
+        </form>
+    </li>
+    {% empty %}
+    <li>No polls available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

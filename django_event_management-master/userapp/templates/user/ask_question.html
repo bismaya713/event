@@ -1,0 +1,17 @@
+<!-- user/ask_question.html -->
+{% extends 'user/base.html' %}
+
+{% block content %}
+<h1>Ask a Question for {{ event.name }}</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="question">Your Question:</label>
+      <textarea id="question" name="question" class="form-control" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Question</button>
+  </form>
+
+  <a href="{% url 'userapp:event-questions' event.id %}" class="btn btn-secondary">Back to Questions</a>
+{% endblock %}

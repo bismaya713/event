@@ -101,6 +101,8 @@ Events
                     </p>
                     <a href="{% url 'userapp:book-event' event.pk %}" class="btn btn-primary btn-sm">View Details</a>
                     <a href="{% url 'userapp:event-discussion-topics' event.id %}" class="btn btn-primary btn-sm">Discussion Topics</a>
+                    <a href="{% url 'userapp:event-polls' event.id %}" class="btn btn-primary btn-sm">Polls</a><br>
+                    <a href="{% url 'userapp:event-questions' event.id %}" class="btn btn-primary btn-sm">Questions</a><br>
                 </div>
             </div>
         </div>

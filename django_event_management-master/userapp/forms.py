@@ -14,7 +14,13 @@ class EventFeedbackForm(forms.ModelForm):
 
 from django import forms
 from events.models import EventMember
+from .models import Profile
 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_picture']
+        
 class EventBookingForm(forms.ModelForm):
     class Meta:
         model = EventMember

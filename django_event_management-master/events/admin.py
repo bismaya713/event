@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mapbox_location_field.admin import MapAdmin
-from .models import EventDiscussionTopic, EventDiscussionComment
+from .models import EventDiscussionTopic, EventDiscussionComment, EventPoll, EventPollChoice, EventQuestion
 
 from .models import (
     EventCategory,
@@ -23,3 +23,6 @@ admin.site.register(EventUserWishList)
 admin.site.register(UserCoin)
 admin.site.register(EventDiscussionTopic)
 admin.site.register(EventDiscussionComment)
+admin.site.register(EventPoll)
+admin.site.register(EventPollChoice)
+admin.site.register(EventQuestion)

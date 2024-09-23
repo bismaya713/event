@@ -66,8 +66,6 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
-from django.shortcuts import render
-
 # Define the index view function
 def index(request):
     return render(request, 'user/index.html')  # Adjust template path if needed

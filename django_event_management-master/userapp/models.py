@@ -4,6 +4,15 @@ from django.utils import timezone
 from django.conf import settings
 from events.models import Event
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+    
+
 class Event(models.Model):  
     name = models.CharField(max_length=200)  
     date = models.DateTimeField()  

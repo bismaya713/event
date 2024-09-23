@@ -221,3 +221,33 @@ class EventDiscussionComment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.user} on {self.topic}'
+
+
+# models.py in events app
+class EventPoll(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    question = models.CharField(max_length=255)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question
+
+class EventPollChoice(models.Model):
+    poll = models.ForeignKey(EventPoll, on_delete=models.CASCADE, related_name='choices')
+    choice_text = models.CharField(max_length=255)
+    votes = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.choice_text
+
+# models.py in events app
+class EventQuestion(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question_text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    is_answered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Question by {self.user} in {self.event}'

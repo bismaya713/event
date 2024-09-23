@@ -14,6 +14,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView , ListView
 from events.models import Event, EventCategory, JobCategory, EventAgenda, EventJobCategoryLinking, EventMember
 
+from .models import Profile
+from .forms import ProfileForm
+
+@login_required
+def profile_view(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('userapp:profile')  # Redirect to the same profile page after saving
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'user/profile.html', {'form': form, 'profile': profile})
+
 
 def index(request):
     # If the user is not logged in, redirect to login page
@@ -98,8 +115,6 @@ def book_event(request, pk):
         return render(request, 'user/book_event.html', {'event': event, 'event_member': event_member})
 
 
-
-    
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
     return render(request, 'user/event_detail.html', {'event': event})
@@ -168,3 +183,62 @@ def add_discussion_topic(request, event_id):
     else:
         form = DiscussionTopicForm()
     return render(request, 'user/add_discussion_topic.html', {'form': form})
+
+# views.py in userapp
+from events.models import EventPoll, EventPollChoice
+
+def event_polls(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    polls = EventPoll.objects.filter(event=event)
+    return render(request, 'user/event_polls.html', {'event': event, 'polls': polls})
+def vote_poll(request, poll_id):
+    poll = get_object_or_404(EventPoll, id=poll_id)
+    if request.method == 'POST':
+        try:
+            choice_id = request.POST['choice']
+            choice = get_object_or_404(EventPollChoice, id=choice_id)
+            choice.votes += 1
+            choice.save()
+            return redirect('userapp:event-polls', event_id=poll.event.id)
+        except KeyError:
+            # Handle the case where 'choice' wasn't submitted
+            messages.error(request, "You must select a choice before voting.")
+            return redirect('userapp:event-polls', event_id=poll.event.id)
+
+    return render(request, 'user/vote_poll.html', {'poll': poll})
+
+
+# views.py in userapp
+from events.models import EventQuestion
+
+def event_questions(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    questions = EventQuestion.objects.filter(event=event)
+    if request.method == 'POST':
+        question_text = request.POST.get('question')
+        if question_text:
+            EventQuestion.objects.create(event=event, user=request.user, question_text=question_text)
+            return render(request, 'user/event_questions.html', {'event': event, 'questions': questions})
+   
+    return render(request, 'user/event_questions.html', {'event': event, 'questions': questions})
+
+def ask_question(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.method == 'POST':
+        question_text = request.POST['question']
+        question = EventQuestion(event=event, user=request.user, question_text=question_text)
+        question.save()
+        return redirect('event-questions', event_id=event.id)
+    return render(request, 'user/ask_question.html', {'event': event})
+
+from django.http import HttpResponseForbidden
+@login_required
+def delete_question(request, question_id, event_id):
+    question = get_object_or_404(EventQuestion, id=question_id, event__id=event_id)
+
+    if question.user == request.user:
+        question.delete()
+        print(f"Redirecting to event-questions for event_id: {event_id}")
+        return redirect('userapp:event-questions', event_id=event_id)
+    else:
+        return HttpResponseForbidden("You are not allowed to delete this question.")

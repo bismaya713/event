@@ -1,0 +1,50 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+QnA
+{% endblock %}
+
+{% block content %}
+
+<div class="py-5" style="width: 100%; padding: 0 15%;">
+    <h1>Questions for {{ event.name }}</h1>
+    <p>Number of questions: {{ questions.count }}</p>
+
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+        <textarea name="question" placeholder="Ask your question" required class="form-control mb-2" rows="3" style="width: 100%;"></textarea>
+        <button type="submit" class="btn btn-primary btn-md">Submit</button>
+    </form>
+
+    <h2>Questions</h2>
+    <ul style="padding: 0; list-style-type: none;">
+        {% for question in questions %}
+            <li style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span>
+                    {{ question.question_text }} - asked by <strong>{{ question.user.username }}</strong>
+                </span>
+                {% if question.user == request.user %}
+                    <form method="POST" action="{% url 'userapp:delete-question' event.id question.id %}" style="margin-left: 5px; display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="border: none; background: repeat; color: black; cursor: pointer;">
+                            <span style="font-size: 0.9em;">Delete</span>
+                        </button>
+                    </form>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No questions yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    button:hover {
+        color: red;
+    }
+</style>
+
+
+
+
+{% endblock %}
